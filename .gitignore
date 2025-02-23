@@ -1,0 +1,13 @@
+.secrets.json
+.venv
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+out.json
+lambda/python_modules
+lambda_layer/python/*
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
