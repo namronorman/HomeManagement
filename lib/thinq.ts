@@ -30,7 +30,7 @@ export class ThinqConstruct extends Construct {
     ]);
 
     // Parameter store value for the secret ARN
-    new systemsmanager.StringParameter(this, 'thinqSecretArn', {
+    const parameterStore = new systemsmanager.StringParameter(this, 'thinqSecretArn', {
       parameterName: '/thinq/discord-webhook',
       stringValue: secrets_values.discordWebhook,
     });
@@ -61,6 +61,7 @@ export class ThinqConstruct extends Construct {
     });
     secret.grantRead(thinqLambda);
     table.grantReadWriteData(thinqLambda);
+    parameterStore.grantRead(thinqLambda);
     
     const rule = new events.Rule(this, 'thinqRule', {
       schedule: events.Schedule.rate(cdk.Duration.minutes(1)),
